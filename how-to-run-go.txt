@@ -1,0 +1,14 @@
+### how to run go script 
+### file with name project and extension go
+### example project.go 
+### go run project.go 
+
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello World")
+}
+### to run this code ###
+
