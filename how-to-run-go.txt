@@ -1,3 +1,4 @@
+https://github.com/bitfield/script 
 ### how to run go script 
 ### file with name project and extension go
 ### example project.go 
