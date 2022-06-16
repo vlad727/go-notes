@@ -12,3 +12,7 @@ func main() {
 }
 ### to run this code ###
 
+// comments in go
+### vars in go 
+var age int = 12 ### set var with int, you can use float32 or float65 or bool true and false  
+var age = 12 ### the same var 
