@@ -19,3 +19,4 @@ var age int = 12 ### set var with int, you can use float32 or float65 or bool tr
 var age = 12 ### the same var 
 go env GOPATH ### path for go programms
 go version ### to get go version
+func main ### имя main является особенным, эта функция будет вызываться сама при запуске программы 
