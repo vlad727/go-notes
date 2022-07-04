@@ -21,4 +21,4 @@ go env GOPATH ### path for go programms
 go version ### to get go version
 func main ### имя main является особенным, эта функция будет вызываться сама при запуске программы 
 fmt.Println("Hello World") ### доступ к функции пакета fmt под названием Println (Print line), затем создание новой строки, содержащей Hello World, и вызов функции с этой строкой в качестве первого и единственного аргумента.
-num := 22 ### short record for var or long record  "var num int = 11"
+num := 22 ### short record for var or long record  "var num int = 11" ### // двоеточие используется только при инициализации
