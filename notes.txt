@@ -2,7 +2,7 @@
 err := cmd.Run()
 
 // Execute the shell command and store output
-cmd := exec.Command("ls")
+cmd := exec.Command("ls")  // exec command 
 out, err := cmd.Output()
 
 if err != nil {
