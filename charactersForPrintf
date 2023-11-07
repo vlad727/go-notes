@@ -5,3 +5,8 @@ v – formats the value in a default format
 s – formats string values 
   var mystring = "Hello world"
   fmt.Printf("The string is %s", mystring)
+Для стандартного вывода строк используйте %s.
+  fmt.Printf("%s\n", "\"string\"")
+
+d - fmt.Printf("That is return from func nmber %d\n", number11Return)
+Используйте %d для стандартного, десятеричного вывода.
