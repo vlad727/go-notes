@@ -1,0 +1,7 @@
+Conversion characters tell Golang how to format different data types. Some of the most commonly used specifiers are:
+v – formats the value in a default format 
+    p := point{1, 2}
+    fmt.Printf("%v\n", p)
+s – formats string values 
+  var mystring = "Hello world"
+  fmt.Printf("The string is %s", mystring)
