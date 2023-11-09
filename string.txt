@@ -1,0 +1,9 @@
+### to uppercase 
+  varToUpper := strings.ToUpper(newVar)
+	fmt.Printf(varToUpper)
+
+### repeate string
+	x := "my new text is this long"
+	y := strings.Repeat("#", utf8.RuneCountInString(x))
+  my new text is this long
+  ########################
