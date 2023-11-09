@@ -1,3 +1,4 @@
+https://gobyexample.com.ru/spawning-processes
 dockerCmd := exec.Command("docker", "images")
 
 	dockerOut, err := dockerCmd.Output()
