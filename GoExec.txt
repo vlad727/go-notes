@@ -1,8 +1,30 @@
 https://gobyexample.com.ru/spawning-processes
 https://www.sohamkamani.com/golang/exec-shell-command/
 dockerCmd := exec.Command("docker", "images")
-
-	dockerOut, err := dockerCmd.Output()
+dockerOut, err := dockerCmd.Output() ### The Output method runs the command, waits for it to finish
 	if err != nil {
 		panic(err)
 	}
+package main
+
+import (
+	"fmt"
+	"os/exec"
+)
+
+func main() {
+	// Создаем массив с сущностями
+	itemsArray := [4]string{"pilot", "proxyv2", "operator", "install-cni"}
+	for _, s := range itemsArray {
+		newVar := fmt.Sprintf("registry.apps.k8s.ose-prod.solution.sbt/istio-syn/%v:1.17.3-4_sberlinux", s)
+		cmd := exec.Command("docker", "pull", newVar)
+		cmdOut, err := cmd.Output()
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("Pull is starting for %v\n", cmdOut)
+		/*The Output method runs the command, waits for it to
+		finish and collects its standard output. If there were no errors, dateOut will hold bytes with the date info.
+		*/
+	}
+}
