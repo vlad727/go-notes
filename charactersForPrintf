@@ -10,3 +10,34 @@ s – formats string values
 
 d - fmt.Printf("That is return from func nmber %d\n", number11Return)
 Используйте %d для стандартного, десятеричного вывода.
+
+###
+diff between Sprintf, Printf, Fprint
+https://qna.habr.com/q/574881
+
+Функционально:
+
+Вернет строку новую строку. Удобно для создания своих строковых представлений для данных других типов.
+var age = 20
+NewAge := fmt.Sprintf("New %v", age)     // "New 20"
+
+
+Используется для отправки данных в "ридер" - в примере происходит отправка в терминал значения переменной age. Print("123") - это обвертка над Fprint(os.Stdout, "123")
+var age = 20
+err := fmt.Fprintf(os.Stdout, age)      // "20"
+
+
+Выводит в терминал форматированную строку. Правила форматирования тут
+var age = 20
+fmt.Printf("New %v\n", age)    // "New 20". Не забывайте ставить символ '\n' - перехода на новую строку.
+
+
+Сохраняет введеное строковое значение в переменную
+var name string
+Scan(&name)
+
+
+При вводе "My name is ThiefPytin"
+Сохранит в переменную name только часть строки подходящей под формат (ThiefPytin)
+var name string
+Scanf("My name is %s", &name)
