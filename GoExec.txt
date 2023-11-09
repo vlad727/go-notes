@@ -1,4 +1,5 @@
 https://gobyexample.com.ru/spawning-processes
+https://www.sohamkamani.com/golang/exec-shell-command/
 dockerCmd := exec.Command("docker", "images")
 
 	dockerOut, err := dockerCmd.Output()
