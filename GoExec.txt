@@ -5,6 +5,8 @@ dockerOut, err := dockerCmd.Output() ### The Output method runs the command, wai
 	if err != nil {
 		panic(err)
 	}
+
+###
 package main
 
 import (
