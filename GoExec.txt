@@ -1,0 +1,6 @@
+dockerCmd := exec.Command("docker", "images")
+
+	dockerOut, err := dockerCmd.Output()
+	if err != nil {
+		panic(err)
+	}
