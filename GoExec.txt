@@ -24,12 +24,14 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("Pull is starting for %v\n", cmdOut)
+		fmt.Println(string(cmdOut)) // will out strings
+		//fmt.Printf("Pull is starting for %v\n", cmdOut)
 		/*The Output method runs the command, waits for it to
 		finish and collects its standard output. If there were no errors, dateOut will hold bytes with the date info.
 		*/
 	}
 }
+
 https://www.reddit.com/r/golang/comments/lt59zy/why_is_my_next_line_of_code_after_syscallexec_not/?rdt=34889
 syscall.Exec does not return on success, it causes the current process to be replaced by another (git in this case). 
 You'll need to use the os/exec package to accomplish what you're trying to do.
