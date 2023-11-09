@@ -18,7 +18,7 @@ func main() {
 	// Создаем массив с сущностями
 	itemsArray := [4]string{"pilot", "proxyv2", "operator", "install-cni"}
 	for _, s := range itemsArray {
-		newVar := fmt.Sprintf("registry.apps.k8s.ose-prod.solution.sbt/istio-syn/%v:1.17.3-4", s)
+		newVar := fmt.Sprintf("<your-private-repo>/istio/%v:1.17.3-4", s)
 		cmd := exec.Command("docker", "pull", newVar)
 		cmdOut, err := cmd.Output()
 		if err != nil {
