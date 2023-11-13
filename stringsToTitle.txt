@@ -5,9 +5,14 @@ import (
 	"strings"
 )
 
+var p = fmt.Println
+
 func Greetings(name string) string {
 
-	return strings.Title("привет, " + name + "!")
+	name = strings.Trim(name, " ")
+	name = strings.ToLower(name)
+	name = strings.Title(name) //nolint
+	return fmt.Sprintf("Привет %s!", name)
 
 }
 
@@ -18,6 +23,7 @@ func main() {
 	response := Greetings(userInput)
 	fmt.Println(response)
 }
+
 
 package main
 
