@@ -1,0 +1,19 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+
+	response := MinInt(43, 50)
+
+	fmt.Printf("The min numbes is: %v\n", response)
+}
+
+func MinInt(x, y float64) int {
+
+	min := math.Min(x, y)
+	return int(min)
+}
