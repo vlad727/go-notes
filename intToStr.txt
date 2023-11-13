@@ -19,3 +19,7 @@ func IntToString(x int) string {
 	s := strconv.Itoa(x)
 	return s
 }
+
+func IntToString(i int) string {
+	return strconv.Itoa(i)
+}
