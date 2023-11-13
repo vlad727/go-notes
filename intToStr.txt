@@ -1,0 +1,21 @@
+package main
+
+import (
+	"fmt"
+	"reflect"
+	"strconv"
+)
+
+// BEGIN (write your solution here)
+
+func main() {
+	x := 42
+	InToting := IntToString(x)
+	fmt.Printf("The type for var %v", InToting)
+	fmt.Println(reflect.TypeOf(InToting))
+}
+func IntToString(x int) string {
+
+	s := strconv.Itoa(x)
+	return s
+}
