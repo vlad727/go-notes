@@ -1,0 +1,120 @@
+package main
+
+import (
+ "fmt"
+ "sync"
+ "time"
+)
+
+func main() {
+ m := map[string]int{}
+
+ var mut sync.Mutex
+
+ go func() {
+  for {
+   mut.Lock()
+   m["a"] = 1
+   mut.Unlock()
+  }
+ }()
+
+ go func() {
+  for {
+   mut.Lock()
+   fmt.Println(m["a"])
+   mut.Unlock()
+  }
+ }()
+
+ time.Sleep(time.Second)
+}
+##################
+package main
+
+import (
+ "fmt"
+ "time"
+)
+
+func main() {
+ x := 2
+
+ ch := make(chan int, 3)
+
+ go func() {
+  time.Sleep(time.Second)
+  ch <- x * x
+  ch <- x * x * x
+ }()
+
+ fmt.Println(<-ch)
+ fmt.Println(<-ch)
+
+ ch <- 1
+}
+
+##################
+package main
+
+import (
+ "fmt"
+ "sync"
+ "time"
+)
+
+func main() {
+ x := 2
+
+ var wg sync.WaitGroup
+
+ ch := make(chan int, 3)
+
+ wg.Add(2)
+
+ go func() {
+  defer wg.Done()
+  time.Sleep(time.Second)
+  ch <- x * x
+ }()
+
+ go func() {
+  defer wg.Done()
+  ch <- x * x * x
+ }()
+
+ go func() {
+  wg.Wait()
+  close(ch)
+ }()
+
+ for v := range ch {
+  fmt.Println(v)
+ }
+
+ fmt.Println("end")
+}
+
+##################
+package main
+
+import (
+ "fmt"
+ "sync"
+ "time"
+)
+
+func main() {
+ ch := make(chan int)
+
+ go func() {
+  ch <- 1
+ }()
+ 
+ time.Sleep(time.Millisecond * 500)
+ close(ch)
+ 
+ for v := range ch {
+  fmt.Println(v)
+ }
+}
