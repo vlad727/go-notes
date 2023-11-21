@@ -1,3 +1,5 @@
+https://www.golinuxcloud.com/golang-http/
+https://www.bastionxp.com/blog/golang-https-client-self-signed-ssl-tls-x509-certificate/
 package main
 import (
 	"crypto/tls"
