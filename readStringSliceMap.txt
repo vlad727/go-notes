@@ -1,0 +1,38 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"reflect"
+	"strings"
+)
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+func main() {
+	dataKubeconfig, err := os.ReadFile("/Users/19990635/.kube/kubeconfig")
+	check(err)
+	//fmt.Println(dataKubeconfig) //That is : []uint8
+	fmt.Println("That is :", reflect.TypeOf(dataKubeconfig))
+	kubeconfigString := string(dataKubeconfig[:])
+	fmt.Println("That is :", reflect.TypeOf(kubeconfigString)) //That is : string
+	mySlice := (strings.Split(kubeconfigString, " "))          // делаем из строки slice
+
+	// range by slice and make map from it
+	for i, element := range mySlice { // проходимся по slice добавляем index
+		m := make(map[int]string) // создаем map
+		m[i] = element            // заполняем карту
+		for k, v := range m {     // проходимся по map with range
+			if v == "" {
+				delete(m, k) //Встроенная функция delete удаляет пару key/value из карты.
+
+			} else {
+				fmt.Println(k, v) // выводим все что осталось
+			}
+		}
+	}
+
+}
