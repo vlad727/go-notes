@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+
+	if len(os.Args) <= 1 {
+		fmt.Println("You did't provide filename\nPlease use: go run file.go <filename>")
+	}
+	fileName := os.Args[1]
+
+	fmt.Printf("Provided file name is: %v\n", fileName)
+	dataFileName, err := os.ReadFile(fileName)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//fmt.Println(dataFileName)
+	//convert uid8 to string
+	str := string(dataFileName)
+
+	//convert string to slice
+	sliceFromStr := strings.Fields(str)
+
+	//fmt.Println(sliceFromStr) //chekc output
+	// print index and elements for slice
+	for i, element := range sliceFromStr {
+		if len(element) >= 100 {
+			fmt.Println(i, element) // print only certs and keys 
+		}
+	}
+
+}
