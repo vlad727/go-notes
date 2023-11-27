@@ -1,0 +1,32 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+	"slices"
+	"strings"
+)
+
+var (
+	CA  = "certificate-authority-data:"
+	TLS = "client-certificate-data:"
+	KEY = "client-key-data:"
+)
+
+func main() {
+
+	dataFromFile, err := os.ReadFile("file")
+	if err != nil {
+		log.Println()
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	slicedataFromFile := strings.Fields(string(dataFromFile))
+	containsCA := slices.Contains(slicedataFromFile, CA)
+	containsTLS := slices.Contains(slicedataFromFile, TLS)
+	containsKEY := slices.Contains(slicedataFromFile, KEY)
+	if containsCA && containsTLS && containsKEY {
+		fmt.Println("Found:", CA, TLS, KEY)
+	}
+}
