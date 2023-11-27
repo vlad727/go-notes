@@ -1,0 +1,17 @@
+package main
+
+import "fmt"
+
+func math(x, y, z, d int) int {
+	return (x + y + z) * d
+
+}
+
+func main() {
+	var x, y, z, d int
+	fmt.Println("Please input 4 numbers:  ")
+	fmt.Scanln(&x, &y, &z, &d) //allow input number in line
+	result := math(x, y, z, d)
+	fmt.Println(result)
+}
+//24
