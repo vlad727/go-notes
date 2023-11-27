@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+	"reflect"
+	"strings"
+)
+
+func main() {
+
+	dataFromFile, err := os.ReadFile("textfile1")
+	if err != nil {
+		log.Println("Standart output")
+		fmt.Println(err)
+		os.Exit(1)
+	}
+/*
+2023/11/27 14:16:58 Standart output
+open textfile1: no such file or directory
+exit status 1
+*/
