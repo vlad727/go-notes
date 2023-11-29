@@ -1,0 +1,60 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"gopkg.in/yaml.v3"
+)
+
+type Config struct {
+	APIVersion string `yaml:"apiVersion"`
+	Clusters   []struct {
+		Cluster struct {
+			CertificateAuthorityData string `yaml:"certificate-authority-data"`
+			InsecureSkipTLSVerify    bool   `yaml:"insecure-skip-tls-verify"`
+			Server                   string `yaml:"server"`
+		} `yaml:"cluster"`
+		Name string `yaml:"name"`
+	} `yaml:"clusters"`
+	Contexts []struct {
+		Context struct {
+			Cluster string `yaml:"cluster"`
+			User    string `yaml:"user"`
+		} `yaml:"context"`
+		Name string `yaml:"name"`
+	} `yaml:"contexts"`
+	CurrentContext string `yaml:"current-context"`
+	Kind           string `yaml:"kind"`
+	Preferences    struct {
+	} `yaml:"preferences"`
+	Users []struct {
+		Name string `yaml:"name"`
+		User struct {
+			ClientCertificateData string `yaml:"client-certificate-data"`
+			ClientKeyData         string `yaml:"client-key-data"`
+		} `yaml:"user"`
+	} `yaml:"users"`
+}
+
+func main() {
+	// Read the file
+	data, err := os.ReadFile("file.yaml")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// Create a struct to hold the YAML data
+	var config Config
+
+	// Unmarshal the YAML data into the struct
+	err = yaml.Unmarshal(data, &config)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// Print the data
+	fmt.Println(config.Clusters[0].Cluster.CertificateAuthorityData)
+}
