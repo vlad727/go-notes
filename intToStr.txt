@@ -23,3 +23,18 @@ func IntToString(x int) string {
 func IntToString(i int) string {
 	return strconv.Itoa(i)
 }
+
+
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	a := strconv.Itoa(2020) // int -> string
+	fmt.Printf("%T \n", a)  // тип - string
+	fmt.Println(a)          // 2020
+}
+
