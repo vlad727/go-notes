@@ -1,0 +1,21 @@
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	foo := "10"
+	bar := "15"
+	barInt, err := strconv.Atoi(bar)
+	if err != nil {
+		panic(err)
+	}
+	fooInt, err := strconv.Atoi(foo)
+	if err != nil {
+		panic(err)
+	}
+	baz := barInt - fooInt
+	fmt.Println(baz) //5
+}
