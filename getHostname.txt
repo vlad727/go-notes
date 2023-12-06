@@ -1,0 +1,33 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+)
+
+func sayhello(w http.ResponseWriter, r *http.Request) {
+
+	hostname, err := os.Hostname()
+	if err != nil {
+		fmt.Println(err)
+		log.Print("Could not get hostname")
+	}
+
+	fmt.Fprintf(w, "Hostname for this container: %v\n", hostname)
+}
+func main() {
+	http.HandleFunc("/", sayhello)           // Устанавливаем роутер
+	err := http.ListenAndServe(":8080", nil) // устанавливаем порт веб-сервера
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
+}
+
+/*
+Любая функция-обработчик принимает два параметра:
+http.ResponseWriter — это структура которая описывает ответ
+*http.Request — указатель на запрос. Из этого параметра можно
+ получать тело запроса, параметры POST, GET или заголовки.
+*/
