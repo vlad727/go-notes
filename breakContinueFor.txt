@@ -1,0 +1,18 @@
+package main
+
+import "fmt"
+
+func main() {
+
+	arrayExample := []string{"One", "Two", "Three"}
+
+	for _, i := range arrayExample {
+
+		if i == "Two" {
+			//break
+			continue
+		}
+		fmt.Println(i)
+		//		break
+	}
+}
