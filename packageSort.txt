@@ -1,0 +1,20 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+
+	s := []float64{5.2, -1.2, 5.6, -3.4}
+	//fmt.Println(sort.Float64sAreSorted(s)) //bool
+	if sort.Float64sAreSorted(s) {
+		fmt.Println("Yes it's sorted")
+	} else {
+		fmt.Println("No it's not sorted")
+	}
+	fmt.Println(sort.Float64sAreSorted(s))
+	fmt.Println(sort.SearchFloat64s(s, 5.6))
+
+}
