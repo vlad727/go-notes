@@ -1,3 +1,4 @@
+//https://vremont-e.ru/ispolzovanie-paketa-flag-v-golang-rukovodstvo-i-sovety/
 func main() {
 
 	// Define multiple bool arguments
