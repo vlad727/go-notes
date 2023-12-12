@@ -25,3 +25,8 @@ The following forms are permitted:
 --flag   // double dashes are also permitted
 -flag=x
 -flag x  // non-boolean flags only
+
+var name = flag.String("name", "John", "Enter your name")
+В этом примере мы объявляем флаг «name» с начальным значением «John» и описанием «Enter your name». 
+Значение этого флага будет доступно в переменной name для дальнейшей обработки в вашем коде.
+Источник: https://vremont-e.ru/ispolzovanie-paketa-flag-v-golang-rukovodstvo-i-sovety
