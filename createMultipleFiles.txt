@@ -1,0 +1,20 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+)
+
+func main() {
+	numFiles := 5
+	for i := 0; i < numFiles; i++ {
+		fileName := fmt.Sprintf("results-%v.dat", i)
+		file, err := os.Create(fileName)
+		if err != nil {
+			log.Fatalf("Problem creating file: %v", err)
+		}
+		fmt.Fprintf(file, "The contents of %v", fileName)
+		file.Close()
+	}
+}
