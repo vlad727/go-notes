@@ -1,0 +1,19 @@
+	package main
+
+	import (
+		"fmt"
+		"os"
+		"time"
+	)
+
+	func main() {
+		os.Create("file.txt")
+		time.Sleep(10 * time.Second)
+		err := os.Remove("file.txt")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		fmt.Println("File deleted")
+	}
