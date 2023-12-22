@@ -12,6 +12,7 @@ func main() {
 	fmt.Println(filepath.Abs("file.txt"))
 	files, _ := filepath.Glob("*.go") 
 	fmt.Println(files)
+        fmt.Println(filepath.Ext("file.txt")) //get the extension
 }
 /*
 /Users/19990635/user/file.txt
