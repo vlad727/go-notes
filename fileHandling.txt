@@ -1,0 +1,22 @@
+package main
+
+import (
+	"fmt"
+	"path/filepath"
+)
+
+func main() {
+	fmt.Println(filepath.Join("/Users/19990635/", "user", "file.txt"))
+	fmt.Println(filepath.Dir("home/user/file.txt"))
+	fmt.Println(filepath.Base("home/user/file.txt"))
+	fmt.Println(filepath.Abs("file.txt"))
+	files, _ := filepath.Glob("*.go") 
+	fmt.Println(files)
+}
+/*
+/Users/19990635/user/file.txt
+home/user
+file.txt
+/Users/19990635/golang/kelche.co/filePath/file.txt <nil>
+[1.go]
+*/
