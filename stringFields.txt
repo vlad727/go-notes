@@ -1,0 +1,15 @@
+/*The Fields() function in Go is used to split a string into substrings based on whitespace and return a slice of the substrings. 
+It removes any leading or trailing whitespace and treats consecutive whitespace characters as a single separator.
+*/
+package main
+import (
+ "fmt"
+ "strings"
+)
+
+func main() {
+  str := "Hello World Golang"
+  fields := strings.Fields(str)
+
+  fmt.Println(fields)
+}
