@@ -1,0 +1,9 @@
+	list, err := clientset.CoreV1().Namespaces().List(context.Background(), v1.ListOptions{LabelSelector: string(labelForIo)})
+	if err != nil {
+		err = fmt.Errorf("error getting namespaces: %v\n", err)
+	}
+	s := []string{}
+	for _, item := range list.Items {
+		s1 := append(s, item.Name)
+		fmt.Println(s1)
+	}
