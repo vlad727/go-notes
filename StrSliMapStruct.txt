@@ -1,0 +1,24 @@
+package main
+
+import "fmt"
+
+type stringStruct struct {
+	length  int
+	breadth float64
+	color   string
+}
+type sliceStructMap struct {
+	list map[int]string
+}
+
+type sliceStructSlice struct {
+	list []string
+}
+
+func main() {
+	fmt.Println(stringStruct{10, 25.10, "red"})
+	s1 := map[int]string{1: "one", 2: "two", 3: "three"}
+	fmt.Println(sliceStructMap{s1})
+	s2 := []string{"one", "two", "three"}
+	fmt.Println(sliceStructSlice{s2})
+}
