@@ -7,3 +7,22 @@
 		s1 := append(s, item.Name)
 		fmt.Println(s1)
 	}
+package main
+
+import "fmt"
+
+func main() {
+	// empty slice
+	s := []string{}
+	// not empty slice
+	s1 := []string{"one", "two", "three"}
+
+	// loop to fill s
+	for _, el := range s1 {
+
+		// to fill slice s1
+		s = append(s, el)
+
+	}
+	fmt.Println(s)
+}
