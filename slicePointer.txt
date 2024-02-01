@@ -1,0 +1,32 @@
+func addNum(nums []int, newNum int) {
+	nums = append(nums, newNum)
+	fmt.Printf("addNum nums %v\n", nums)
+}
+
+func main() {
+	nums := []int{1, 2, 3}
+	fmt.Printf("  main nums %v\n", nums)
+	addNum(nums, 4)
+	fmt.Printf("  main nums %v\n", nums)
+}
+
+  main nums [1 2 3]
+addNum nums [1 2 3 4]
+  main nums [1 2 3]
+========================================
+func addNum(nums *[]int, newNum int) {
+	*nums = append(*nums, newNum)
+	fmt.Printf("addNum nums %v\n", *nums)
+}
+
+func main() {
+	nums := []int{1, 2, 3}
+
+	fmt.Printf("  main nums %v\n", nums)
+	addNum(&nums, 4)
+	fmt.Printf("  main nums %v\n", nums)
+}
+
+ main nums [1 2 3]
+addNum nums [1 2 3 4]
+  main nums [1 2 3 4]
