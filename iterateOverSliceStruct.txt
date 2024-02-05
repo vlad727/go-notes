@@ -1,0 +1,59 @@
+// it has struct with []string and and slice with []struct
+
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/gorilla/mux"
+	"log"
+	"net/http"
+)
+
+type listStruct struct {
+	Name []string `json:"Name Control Plane"`
+}
+
+var nums []listStruct
+
+// get string from request
+func returnAnalyzeDataPlane(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)         // set to vars
+	key := vars["name"]         // put var to var key
+	for _, item := range nums { // iterate over slices
+		for _, el := range item.Name { // iterate over elements slice
+			if key == el { // compare key with element
+				fmt.Printf("Do something with %s", el)
+				json.NewEncoder(w).Encode(el)
+			}
+		}
+
+	}
+
+}
+func homePage(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Synapse Service Mesh Manager\n")
+	log.Println("Endpoint Hit: homePage\n")
+}
+func handleRequests() {
+	// creates a new instance of a mux router
+	myRouter := mux.NewRouter().StrictSlash(true)
+	// replace http.HandleFunc with myRouter.HandleFunc
+	myRouter.HandleFunc("/", homePage)
+	myRouter.HandleFunc("/check/{name}", returnAnalyzeDataPlane)
+	//myRouter.HandleFunc("/article", createNewArticle).Methods("POST")
+	// finally, instead of passing in nil, we want
+	// to pass in our newly created router as the second
+	// argument
+	log.Fatal(http.ListenAndServe(":8081", myRouter))
+}
+
+func main() {
+
+	s1 := []string{"one", "two", "three"}
+	nums = []listStruct{
+		{s1},
+	}
+
+	handleRequests()
+}
