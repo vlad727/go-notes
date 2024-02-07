@@ -1,0 +1,9 @@
+//https://blog.kowalczyk.info/article/wOYk/advanced-command-execution-in-go-with-osexec.html
+cmd := exec.Command("./istioctl-osx", "analyze", "-n", arg3)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		log.Fatalf("cmd.Run() failed with %s\n", err)
+
+  // stdout and stderr to stdout 
