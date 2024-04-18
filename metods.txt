@@ -1,0 +1,86 @@
+package main
+
+import (
+	"fmt"
+)
+
+// https://www.youtube.com/watch?v=fmme6YAaVD0&list=PLHUicSITKZEliAGBSTHnqnlY5voTqT3-5&index=31
+// переменная для ivanov
+// экземпляр для струтуры customers
+var ivanov = customers{
+	name: "Иванов Сергей Васильевич",
+	deals: []transactions{
+		{amount: 6, price: 60},
+		{amount: 6, price: 70},
+		{amount: 7, price: 80},
+		{amount: 1, price: 90},
+	},
+}
+
+// переменная для  nogov
+// экземпляр для струтуры customers
+var nogov = customers{
+	name: "Ногов Геннадий Сидорович",
+	deals: []transactions{
+		{amount: 6, price: 60},
+		{amount: 6, price: 70},
+		{amount: 7, price: 80},
+		{amount: 1, price: 90},
+		{amount: 2, price: 10},
+		{amount: 3, price: 12},
+		{amount: 4, price: 14},
+	},
+	// amount == количество
+	// price == общая сумма покупок
+}
+
+// структура для клиентов со вложенной структурой deals (slice)
+// тип данных, определяемый разработчиком и служащий для представления каких-либо объектов.
+// Структура — это тип, содержащий именованные поля
+// https://www.digitalocean.com/community/tutorials/defining-structs-in-go-ru
+type customers struct {
+	name  string
+	deals []transactions
+}
+
+// струтура transactions (slice)
+type transactions struct {
+	amount int // продажи(кол.)
+	price  int // цена
+}
+
+// метод обьявляется так же как и func, но перед названим func обьявляется имя струтуры (c customers)
+/*
+Методы определяются также как и обычные функции за тем исключением, что в определении метода
+также необходимо указать получателя или receiver. Получатель - это параметр того типа, к которому прикрепляется метод:
+func (имя_параметра тип_получателя) имя_метода (параметры) (типы_возвращаемых_результатов){
+    тело_метода
+}
+*/
+// метод showDeals
+func (c customers) showDeals() {
+	fmt.Println(c.deals)
+
+}
+
+// метод totalDeal возвращает int
+// получаем сумму всех покупок
+// проходимся по index и складываем все сумму всех покупок
+func (c customers) totalDeal() int {
+	puirchaseAmount := 0
+	for k, _ := range c.deals {
+		puirchaseAmount = puirchaseAmount + c.deals[k].price
+	}
+	return puirchaseAmount
+}
+
+func main() {
+	fmt.Println("Первая сделка Иванова", ivanov.deals[0].amount)
+	fmt.Println("Вторая сделка Nogov", nogov.deals[1].amount)
+	fmt.Println("Цена второй сделки", nogov.deals[1].price)
+	// вызов метода
+	ivanov.showDeals()                                              // показать deals для ivanov
+	nogov.showDeals()                                               // показать deals для nogov
+	fmt.Println("количество сделок для Ivanov", ivanov.totalDeal()) // показать сумму всех покупок Ivanov
+	fmt.Println("количество сделок для Nogov", nogov.totalDeal())   // показать сумму всех покупок Ivanov
+}
