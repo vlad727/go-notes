@@ -1,0 +1,82 @@
+package main
+
+import "fmt"
+
+// https://www.youtube.com/watch?v=NkhvBXQly8I&list=PLHUicSITKZEliAGBSTHnqnlY5voTqT3-5&index=20
+
+// interfaces ----------------------------------------
+// на уровне интерфейсов определяется, какие методы может и должна содержать конкретная переменная
+type worker interface {
+	say()
+	work()
+	fail()
+}
+
+type topManager interface {
+	say()
+	think()
+}
+
+// structs ----------------------------------------
+type empFront struct {
+}
+
+type empBack struct {
+}
+
+// varibles ----------------------------------------
+var ivanov worker = empFront{}
+var nogov worker = empBack{}
+var medvedev topManager = empFront{} // тип интерфейса topManager но экзепляр empFront(продажник)
+
+// metods ----------------------------------------
+func (e empFront) say() {
+	fmt.Println("I'm working in Front!!!")
+}
+func (e empBack) say() {
+	fmt.Println("I'm working in Back!!!")
+}
+
+func (e empFront) work() {
+	fmt.Println("I'm do my job ")
+
+}
+
+func (e empBack) work() {
+	fmt.Println("I'm do my job ")
+
+}
+func (e empFront) think() {
+	fmt.Println("I'm thinking!!")
+}
+
+func (e empFront) fail() {
+	fmt.Println("I'm failed!!")
+}
+
+func (e empBack) fail() {
+	fmt.Println("I'm failed!!")
+}
+
+// main func ----------------------------------------
+func main() {
+	ivanov.say()
+	nogov.say()
+	ivanov.work()
+	nogov.work()
+	medvedev.think()
+	// metod think does not exist because interface worker does not contain such metod
+	//ivanov.think()
+	medvedev.say() // var medvedev can only say() metod, because metod say() is a part interface topManager
+	nogov.fail()
+}
+
+/*
+interfaces - позволяет управлять методами структур
+______________________________
+		Interfaces            ###
+	metod1 metod2 metod3      ### func (c customers ) showUsers(){}
+struct struct struct struct   ### type customers struct{}
+vars vars vars vars vars vars ### >>> var user string = "vlad",  var num int = 10
+______________________________
+*/
