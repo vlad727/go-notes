@@ -1,0 +1,53 @@
+package main
+
+import "fmt"
+
+// https://www.youtube.com/watch?v=ygLYvC1Abo8&list=PLHUicSITKZEliAGBSTHnqnlY5voTqT3-5&index=29
+type client struct {
+	name    string
+	balance int
+}
+
+var client1 = client{name: "Иванов Иван Иванович", balance: 1000}
+
+var client2 = client{name: "Петров Петр  Петрович", balance: 2000}
+
+// without pointer
+func changeBalance(c client) {
+	c.balance = c.balance + 100
+
+	fmt.Println("Текущий баланс клиента", c.name, "состовляет: ", c.balance, " fmt from func changeBalance") // 1100
+
+}
+
+// with pointer
+func changeBalancePointer(c *client) {
+	c.balance = c.balance + 100
+
+	fmt.Println("Текущий баланс клиента", c.name, "состовляет: ", c.balance, " fmt from func changeBalance")
+
+}
+
+func main() {
+	//without pointer
+	changeBalance(client1)
+	fmt.Println("Текущий баланс клиента", client1.name, " состовляет:", client1.balance, "fmt from main func") // 1000
+
+	//with pointer
+	changeBalancePointer(&client2) // & не нужно создавать дубликат, не нужна новая яйчейка памяти
+	fmt.Println("Текущий баланс клиента", client2.name, " состовляет:", client2.balance, "fmt from main func")
+}
+
+/*
+before
+The main problem is that balance stay 1000, по сути был создан дуликат
+Текущий баланс клиента Иванов Иван Иванович состовляет:  1100  fmt from func changeBalance
+Текущий баланс клиента Иванов Иван Иванович  состовляет: 1000 fmt from main func
+after
+Текущий баланс клиента Иванов Иван Иванович состовляет:  1100  fmt from func changeBalance
+Текущий баланс клиента Иванов Иван Иванович  состовляет: 1000 fmt from main func
+Текущий баланс клиента Петров Петр  Петрович состовляет:  2100  fmt from func changeBalance
+Текущий баланс клиента Петров Петр  Петрович  состовляет: 2100 fmt from main func
+
+
+*/
