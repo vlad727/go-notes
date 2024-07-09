@@ -1,0 +1,70 @@
+import "strings"
+
+sb := strings.Builder{}
+
+sb.WriteString("hello")
+sb.WriteString(" ")
+sb.WriteString("world")
+
+sb.String() // "hello world"
+
+package getsa
+
+import (
+	"golang.org/x/net/context"
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
+	"log"
+	"net/http"
+	"os"
+	"strings"
+	"text/template"
+)
+
+var (
+	// outside cluster client
+	config, _    = clientcmd.BuildConfigFromFlags("", os.Getenv("KUBECONFIG"))
+	clientset, _ = kubernetes.NewForConfig(config)
+	/*
+		// inside cluster client
+		// creates the in-cluster config
+		config, _ = rest.InClusterConfig()
+
+		// creates the clientset
+		clientset, _ = kubernetes.NewForConfig(config)
+
+	*/
+	s strings.Builder
+)
+
+// get sa, build string and print it
+func GetSa(w http.ResponseWriter, r *http.Request) {
+
+	listSa, err := clientset.CoreV1().ServiceAccounts("").List(context.Background(), v1.ListOptions{})
+	if err != nil {
+		log.Println(err)
+	}
+	for _, saName := range listSa.Items {
+		log.Println(saName.Namespace, saName.Name)
+		s.WriteString(saName.Namespace + ":" + saName.Name + "\n")
+	}
+	log.Println(s.String())
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/octet-stream")
+
+	t, _ := template.ParseFiles("tmpl/getsa.html")
+	Msg := struct {
+		Message string
+	}{
+		Message: s.String(),
+	}
+
+	err = t.Execute(w, Msg)
+	if err != nil {
+		return
+	}
+	// reset string builder
+	s.Reset()
+
+}
