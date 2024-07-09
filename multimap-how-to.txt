@@ -1,0 +1,68 @@
+https://pkg.go.dev/github.com/jwangsadinata/go-multimap#section-readme
+// allow to create map with multiple values and uniq key
+/*
+&{map[autz-lt1-std-da:[default prometheus-mona] 
+avik1:[default istio-egressgateway-service-account istio-ingressgateway-service-account istiod-avik1] 
+bridge-box:[alertmanager-main console default dex grafana kube-apiserver kube-state-metrics longhorn-service-account longhorn-support-bundle node-exporter oidc-webhook-authenticator prometheus-adapter prometheus-k8s prometheus-operator thanos-compact thanos-querier thanos-rule thanos-store] 
+default:[default jenkins-mgmt my-release-redis-master my-release-redis-replica restricted-admin-sa]
+*/
+package getsa
+
+import (
+	"github.com/jwangsadinata/go-multimap/slicemultimap"
+	"golang.org/x/net/context"
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
+	"log"
+	"net/http"
+	"os"
+	"text/template"
+)
+
+var (
+	// outside cluster client
+
+	config, _    = clientcmd.BuildConfigFromFlags("", os.Getenv("KUBECONFIG"))
+	clientset, _ = kubernetes.NewForConfig(config)
+
+)
+
+func GetSa(w http.ResponseWriter, r *http.Request) {
+
+	multiMap := slicemultimap.New()
+	m := map[string]string{}
+	listSa, err := clientset.CoreV1().ServiceAccounts("").List(context.Background(), v1.ListOptions{})
+	if err != nil {
+		log.Println(err)
+	}
+	for _, saName := range listSa.Items {
+		log.Println(saName.Namespace, saName.Name)
+
+		multiMap.Put(saName.Namespace, saName.Name)
+	}
+
+
+	// output with ResponseWriter
+	log.Println(multiMap)
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/octet-stream")
+
+	t, _ := template.ParseFiles("tmpl/getsa.html")
+
+	Marketing := struct {
+		Message map[string]string
+	}{
+		Message: m,
+	}
+	//log.Println(Marketing)
+	err = t.Execute(w, Marketing)
+	if err != nil {
+		return
+	}
+
+}
+/*
+
+*/
+
