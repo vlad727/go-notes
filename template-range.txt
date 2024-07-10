@@ -1,1 +1,11 @@
 https://www.practical-go-lessons.com/chap-32-templates#dot-notation
+https://forum.golangbridge.org/t/automatically-creating-a-new-dropdown-list/11206
+
+<form>
+<select name="choice" style="font-size:18pt;height:40px;width:410px;" required>
+<option value="">Make your choise</option>
+{{range .}} <option value='1'>{{.Name}}<option>
+{{end}}
+</select>
+<input type="submit">
+</form>`
