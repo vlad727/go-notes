@@ -1,4 +1,5 @@
 // map[choice1:[default vlku5 cluster-admin]] <--- "default vlku5" it's string
+//https://www.codedodle.com/go-split-string.html
 for k, v := range r.Form {
 		fmt.Println("Key: ", k)
 		//fmt.Println("Value: ", strings.Join(v, " "))
