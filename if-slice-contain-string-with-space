@@ -1,0 +1,20 @@
+// map[choice1:[default vlku5 cluster-admin]] <--- "default vlku5" it's string
+for k, v := range r.Form {
+		fmt.Println("Key: ", k)
+		//fmt.Println("Value: ", strings.Join(v, " "))
+		log.Println(v)
+		for _, el := range v {
+			if strings.Contains(el, " ") {
+				substrs := strings.Split(el, " ")
+				for _, element := range substrs {
+					sl = append(sl, element)
+				}
+			} else {
+				sl = append(sl, el)
+			}
+		}
+	}
+/* 2024/07/12 12:59:24 0 default
+2024/07/12 12:59:24 1 vlku5
+2024/07/12 12:59:24 2 cluster-admin
+*/
