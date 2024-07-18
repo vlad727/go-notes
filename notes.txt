@@ -1,1 +1,33 @@
-
+ErrorMsg = err.Error() ### err to string 
+http.Redirect(w, r, "/error", http.StatusSeeOther) ### allow redirect post or get request
+----------------------------------------------------------------------------------------------------------------
+### concatenate string example ###
+StringGetSa strings.Builder ### declare Builder
+StringGetSa.WriteString(el.Namespace + " --- " + el.Name + "<br>") ### take log println and concatenate it
+Message: StringGetSa.String()  ### put all concatenated strings to var struct
+StringGetSa.Reset() ### reset string builder to avoid concatenate after refresh page
+----------------------------------------------------------------------------------------------------------------
+### buttons with select list ###
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-10">
+      <form action="/createcrbmanager" method="post">
+        <select name="choice1" style="font-size:18pt;height:40px;width:410px;" required>
+          <option value="">Service Account</option>
+          {{range $key, $value := .SaMap}}<option>
+          {{ $key }} {{ $value }}
+          {{end}}
+        </option>
+        </select>
+        <select name="choice1" style="font-size:18pt;height:40px;width:410px;" required>
+          <option value="">Cluster Role</option>
+          {{range .CrbSlice}}<option>
+          {{ . }}
+          {{end}}
+        </option>
+        </select>
+        <input type="submit" value="Create CRB">
+      </form>
+    </div>
+  </div>
+	----------------------------------------------------------------------------------------------------------------
