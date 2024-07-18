@@ -1,5 +1,9 @@
 ErrorMsg = err.Error() ### err to string 
+----------------------------------------------------------------------------------------------------------------
 http.Redirect(w, r, "/error", http.StatusSeeOther) ### allow redirect post or get request
+about redirect:
+https://stackoverflow.com/questions/35934298/how-to-redirect-to-a-url
+https://stackoverflow.com/questions/58448184/is-it-possible-to-redirect-a-page-with-new-url-after-executing-template-in-go
 ----------------------------------------------------------------------------------------------------------------
 ### concatenate string example ###
 StringGetSa strings.Builder ### declare Builder
