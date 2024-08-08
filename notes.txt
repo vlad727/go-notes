@@ -35,3 +35,16 @@ StringGetSa.Reset() ### reset string builder to avoid concatenate after refresh 
     </div>
   </div>
 	----------------------------------------------------------------------------------------------------------------
+Do logging for code ex: log.Printl funcs, output for iteration, logging error this will help you debug your application in future
+----------------------------------------------------------------------------------------------------------------
+Add comments try to describe what exactly do this part or func
+----------------------------------------------------------------------------------------------------------------
+Clear your vars ex: slice to nil (sl1 = nil) or reset string Builder String.reset or clear map m0 = make(map[string][]string)
+----------------------------------------------------------------------------------------------------------------
+Take notes in CHANGELOG.md or use smt else
+----------------------------------------------------------------------------------------------------------------
+Do global var to avoid repeat code in your files
+----------------------------------------------------------------------------------------------------------------
+Do health checks it helps to know application is running
+----------------------------------------------------------------------------------------------------------------
+If you have a global var ( var myvar string ) do not reassign for this var like myvar := "mystring" use myvar = "mystring" ### golang will highlight it with green
