@@ -49,4 +49,7 @@ Do health checks it helps to know application is running
 ----------------------------------------------------------------------------------------------------------------
 If you have a global var ( var myvar string ) do not reassign for this var like myvar := "mystring" use myvar = "mystring" ### golang will highlight it with green
 ----------------------------------------------------------------------------------------------------------------
+if you get string from file do not forget to del /n from string
 tmp = strings.ReplaceAll(strtoken, "Bearer ", "") ### if you want to delete smt from string use for it Replace not Trim, example show how to delete Bearer and space before token
+
+
