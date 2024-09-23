@@ -73,3 +73,12 @@ example:
 	}}
 The request is invalid: the server rejected our request due to an error in our request
 !!! an alternative way is using Update 
+Resolution for / character in label is use "~1"
+https://stackoverflow.com/questions/65887327/patch-kubernetes-label-with-character
+
+	payload := []patchStringValue{{
+		Op:    "remove",
+		Path:  "/metadata/labels/pod-security.kubernetes.io~1enforce",
+		Value: "",
+	}}
+
