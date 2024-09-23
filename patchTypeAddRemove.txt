@@ -1,0 +1,61 @@
+### How to use defferent type of patch for golang and k8s ###
+
+types.MergePatchType - allow you create item, example add annotation or add label
+types.JSONPatchType - allow you replace smt, remove annotation or label  
+example with JSONPatchType below:
+
+
+package main
+
+import (
+	"encoding/json"
+	"golang.org/x/net/context"
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
+	"log"
+	"os"
+)
+
+var (
+	NamespaceName string
+
+	// outside cluster client
+	config, _    = clientcmd.BuildConfigFromFlags("", os.Getenv("KUBECONFIG"))
+	Clientset, _ = kubernetes.NewForConfig(config)
+)
+
+type patchStringValue struct {
+	Op    string `json:"op"`
+	Path  string `json:"path"`
+	Value string `json:"value"`
+}
+
+func main() {
+
+### declare namespace name
+	// get items from slice
+	NamespaceName = "test-ns"
+
+### init struct with empty value which allow to delete such label
+	//Note: that type used MergePatchType (allow adding new piece of json or remove)
+	payload := []patchStringValue{{
+		Op:    "remove",
+		Path:  "/metadata/labels/test",
+		Value: "",
+	}}
+
+ ### convert it to json
+	payloadBytes, err := json.Marshal(payload)
+
+ ### patch namespace label
+	_, err = Clientset.CoreV1().Namespaces().Patch(context.TODO(), NamespaceName, types.JSONPatchType, payloadBytes, v1.PatchOptions{})
+	if err != nil {
+		log.Printf("Failed set label to %s", NamespaceName)
+		log.Println(err)
+	} else {
+		//log.Println("Label has been set", string(payloadbytes))
+	}
+
+}
