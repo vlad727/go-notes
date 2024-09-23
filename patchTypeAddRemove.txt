@@ -59,3 +59,17 @@ func main() {
 	}
 
 }
+Note:
+https://stackoverflow.com/questions/57480205/error-while-applying-json-patch-to-kubernetes-custom-resource
+It does not work with nested object
+"The Kubernetes API server will not recursively create nested objects for a JSON patch input"
+
+
+example: 
+	payload := []patchStringValue{{
+		Op:   "remove",
+		Path: "/metadata/labels/pod-security.kubernetes.io/enforce", 
+		//Value: "",
+	}}
+The request is invalid: the server rejected our request due to an error in our request
+!!! an alternative way is using Update 
